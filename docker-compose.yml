@@ -1,0 +1,20 @@
+version: '3'
+services:
+  db:
+    image: ${SQLITE}
+    tty: true
+    volumes:
+      - my-data:/db
+    env_file:
+      - .env
+  app:
+    build: .
+    ports:
+      - 3000:3000
+    depends_on:
+      - db
+    volumes:
+      - .:/home/app/
+
+volumes:
+  my-data:
