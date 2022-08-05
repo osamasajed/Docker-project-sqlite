@@ -37,6 +37,18 @@ jobs:
       
       - name: Testing App
         run: bundle exec rake  
-
+  publish:
+    runs-on: ubuntu-latest
+    needs: build
+    env:
+      DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+      DOCKER_uSER: ${{ secrets.DOCKER_USER }}
+    steps:
       - name: Docker Login
-        run: docker login -u muhammadosama -p leo173019
+        run: docker login -u "$secret.DOCKER_USER" -p "$secret.DOCKER_PASSWORD"
+
+      - name: Creating Docker Image
+        run: docker build . -t "$secret.DOCKER_USER"/sqlite-project:1.0
+
+      - name: Uploading to Docker Hub
+        run: docker push "$secret.DOCKER_USER"/sqlite-project
