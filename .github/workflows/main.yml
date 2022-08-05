@@ -52,9 +52,12 @@ jobs:
 
 #      - name: Uploading to Docker Hub
 #        run: docker push "$DOCKER_USER"/sqlite-project
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
         
       - name: Build and Upload
         uses: docker/build-push-action@v3
         with:
           push: true
-          tags: user/app:latest
+          tags: muhammadosama/sqlite-project:latest
