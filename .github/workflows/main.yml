@@ -36,4 +36,16 @@ jobs:
         run: bundle exec rails db:migrate
       
       - name: Testing App
-        run: bundle exec rake
+        run: bundle exec rake  
+
+      - name: Docker Login
+        env:
+          DOCKER_USER: ${{secret.DOCKER_USER}}
+          DOCKER_PASSWORD: ${{secret.DOCKER_PASSWORD}}
+        run: docker login -u "$DOCKER_USER" -p "$DOCKER_PASSWORD"
+
+      - name: Creating Docker Image
+        run: docker build . -t "$secret.DOCKER_USER"/sqlite-project:1.0
+
+      - name: Uploading to Docker Hub
+        run: docker push "$secret.DOCKER_USER"/sqlite-project
