@@ -39,7 +39,4 @@ jobs:
         run: bundle exec rake  
 
       - name: Docker Login
-        env:
-          DOCKER_USER: ${{secret.DOCKER_USER}}
-          DOCKER_PASSWORD: ${{secret.DOCKER_PASSWORD}}
         run: docker login -u muhammadosama -p leo173019
