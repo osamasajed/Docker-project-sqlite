@@ -47,8 +47,14 @@ jobs:
       - name: Docker Login
         run: docker login -u "$DOCKER_USER" -p "$DOCKER_PASSWORD"
 
-      - name: Creating Docker Image
-        run: docker build . -f Dockerfile -t "$DOCKER_USER"/sqlite-project:1.0
+#      - name: Creating Docker Image
+#        run: docker build . -f Dockerfile -t "$DOCKER_USER"/sqlite-project:1.0
 
-      - name: Uploading to Docker Hub
-        run: docker push "$DOCKER_USER"/sqlite-project
+#      - name: Uploading to Docker Hub
+#        run: docker push "$DOCKER_USER"/sqlite-project
+        
+      - name: Build and Upload
+        uses: docker/build-push-action@v3
+        with:
+          push: true
+          tags: user/app:latest
