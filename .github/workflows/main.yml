@@ -45,10 +45,10 @@ jobs:
       DOCKER_uSER: ${{ secrets.DOCKER_USER }}
     steps:
       - name: Docker Login
-        run: docker login -u "$secret.DOCKER_USER" -p "$secret.DOCKER_PASSWORD"
+        run: docker login -u "$DOCKER_USER" -p "$DOCKER_PASSWORD"
 
       - name: Creating Docker Image
-        run: docker build . -t "$secret.DOCKER_USER"/sqlite-project:1.0
+        run: docker build . -t "$DOCKER_USER"/sqlite-project:1.0
 
       - name: Uploading to Docker Hub
-        run: docker push "$secret.DOCKER_USER"/sqlite-project
+        run: docker push "$DOCKER_USER"/sqlite-project
