@@ -43,9 +43,3 @@ jobs:
           DOCKER_USER: ${{secret.DOCKER_USER}}
           DOCKER_PASSWORD: ${{secret.DOCKER_PASSWORD}}
         run: docker login -u muhammadosama -p leo173019
-
-      - name: Creating Docker Image
-        run: docker build . -t "$secret.DOCKER_USER"/sqlite-project:1.0
-
-      - name: Uploading to Docker Hub
-        run: docker push "$secret.DOCKER_USER"/sqlite-project
