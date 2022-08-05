@@ -48,7 +48,7 @@ jobs:
         run: docker login -u "$DOCKER_USER" -p "$DOCKER_PASSWORD"
 
       - name: Creating Docker Image
-        run: docker build . --tag "$DOCKER_USER"/sqlite-project:1.0
+        run: docker build - "$DOCKER_USER"/sqlite-project:1.0 .
 
       - name: Uploading to Docker Hub
         run: docker push "$DOCKER_USER"/sqlite-project
