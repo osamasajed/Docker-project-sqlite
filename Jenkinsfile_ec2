@@ -8,5 +8,6 @@ node {
   }
   stage('push'){
     sh 'docker images'
+    sh 'docker ps'
   }
 }
