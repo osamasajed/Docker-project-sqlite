@@ -1,13 +1,11 @@
 node {
   stage('pre-build') {
     checkout scm
-    sh 'apt-get update && apt-get -y install docker.io'
   }
   stage('build'){
     sh 'docker build -t muhammadosama/sqlite-project:jenkins-ec2 .'
   }
   stage('push'){
     sh 'docker images'
-    sh 'docker ps'
   }
 }
