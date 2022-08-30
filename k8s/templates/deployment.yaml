@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "k8s.fullname" . -}}-deployment
+  labels:
+    app: {{ include "k8s.fullname" . -}}-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ include "k8s.fullname" . -}}-app
+  template:
+    metadata:
+      labels:
+        app: {{ include "k8s.fullname" . -}}-app
+    spec:
+      containers:
+      - name: {{ include "k8s.fullname" . -}}-app
+        image: {{ .Values.docker.uname -}}/{{- .Values.docker.image -}}:{{- .Values.docker.tag }}
+        volumeMounts:
+        - mountPath: {{ .Values.app.containerPath }}
+          name: {{ include "k8s.fullname" . -}}-app-data
+        ports:
+        - containerPort: {{ .Values.app.containerPort }}
+      volumes:
+      - name: {{ include "k8s.fullname" . -}}-app-data
+        hostPath:
+          path: /data
